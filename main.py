@@ -20,17 +20,12 @@ wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_1qB_gW6tQY')))
 driver.find_element_by_class_name('_3uH_7bQln7')
 driver.find_element_by_class_name('_2LRJiEXVaS')
 
-# time.sleep(3)
-
 wait.until(EC.element_to_be_clickable((By.CLASS_NAME, '_3VDdKLbreA')))
 driver.find_element_by_class_name('_3ne0Y17r_I')
 buttons = driver.find_elements_by_class_name('_2jKeGFDxcF._1zaFE15_iG')
-
-# print(button.get_attribute('outerHTML'))
-# button.click()
 print(len(buttons))
 
-post_index = 208
+post_index = 0
 while True:
     print(post_index)
     buttons = driver.find_elements_by_class_name('_2jKeGFDxcF._1zaFE15_iG')
@@ -62,26 +57,25 @@ while True:
             # print(count)
 
             load_count = int(count / 20)
-            # print('start loading...')
             for i in range(load_count):
-                # print(f'load {i}')
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(2)
 
             html = driver.page_source
             users = re.findall('_10a0wuNKuW">(.*?)</div>', html)
             rates = re.findall('별점</em>(.*?)</span>', html)
-            # print(len(users), end=' ')
+
             print(users)
+            print(rates)
+
             f.write(users.__str__())
             f.write('\n')
-            # print(len(rates), end=' ')
-            print(rates)
             f.write(rates.__str__())
             f.write('\n')
 
             f.close()
 
+            # 뒤로 가기
             driver.back()
 
             post_index = post_index + 1
