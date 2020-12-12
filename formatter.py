@@ -2,6 +2,9 @@ f = open('result.txt', 'r')
 f_places = open('places.csv', 'w')
 f_ratings = open('ratings.csv', 'w')
 
+f_places.write('place,category,location\n')
+f_ratings.write('username,place,rating\n')
+
 while True:
     line1 = f.readline().strip()
     line2 = f.readline().strip()
@@ -10,7 +13,7 @@ while True:
     if not line1 or not line2 or not line3:
         break
 
-    place_info = line1.replace('/', ',')
+    place_info = line1.replace(',', '|').replace('/', ',')
     name = line1.split('/')[0]
     # print(place_info)
 
